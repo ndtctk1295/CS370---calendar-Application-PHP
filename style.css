@@ -1,0 +1,20 @@
+body {
+    background-color: #f8f9fa;
+}
+
+#timetable th, #timetable td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+#timetable td {
+    height: 50px;
+}
+
+.bg-primary {
+    background-color: #007bff !important;
+}
+
+.text-white {
+    color: #ffffff !important;
+}
