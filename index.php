@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Timetable</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">    
     <style>
         .activity {
             cursor: pointer;
@@ -11,8 +11,21 @@
     </style>
 </head>
 <body>
-    <div class="container">
+<div class="container">
         <h1>Timetable</h1>
+
+        <!-- Search Form -->
+        <form id="searchForm" action="search_results.php" method="GET" class="mb-4">
+            <div class="row">
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="search_title" placeholder="Search by Activity Title" required>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </form>
+
         <form id="addActivityForm">
             <div class="row">
                 <div class="col-md-3">
@@ -44,12 +57,16 @@
             </div>
         </form>
 
+        <!-- Rest of the Timetable code remains the same -->
+
+        <!-- Previous, Current, Next Week Navigation -->
         <div class="d-flex justify-content-between align-items-center mt-5">
             <button id="prevWeek" class="btn btn-secondary">Previous Week</button>
             <h2 id="weekDisplay">Week of <span id="weekStartDate"></span> - <span id="weekEndDate"></span></h2>
             <button id="nextWeek" class="btn btn-secondary">Next Week</button>
         </div>
 
+        <!-- Timetable Display -->
         <table class="table table-bordered mt-3">
             <thead>
                 <tr>
@@ -66,7 +83,7 @@
             <tbody>
                 <?php for ($i = 0; $i < 24; $i++): ?>
                     <tr>
-                        <td><?php echo $i . 'am'; ?></td>
+                        <td><?php echo $i . ': 00'; ?></td>
                         <?php for ($j = 0; $j < 7; $j++): ?>
                             <td class="time-slot" data-hour="<?php echo $i; ?>" data-day="<?php echo $j; ?>"></td>
                         <?php endfor; ?>
@@ -310,7 +327,7 @@ function renderTaskOnCorrectDay(task, taskDate, start, end) {
     fetchTasks();
 });
 </script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>

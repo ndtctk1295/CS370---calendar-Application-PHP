@@ -1,8 +1,5 @@
 <?php
-$conn = new mysqli('localhost', 'root', '', 'calendar_app', 3307); // Note the port number 3307
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+$mysqli = new mysqli('localhost', 'root', '', 'calendar_app', 3307);
 
 $id = $_POST['id'];
 $title = $_POST['title'];
@@ -11,13 +8,17 @@ $start_time = $_POST['start_time'];
 $end_time = $_POST['end_time'];
 $recurrence = $_POST['recurrence'];
 
-$sql = "UPDATE tasks SET title='$title', description='$description', start_time='$start_time', end_time='$end_time', recurrence='$recurrence' WHERE id=$id";
+// Prepare the update query
+$query = "UPDATE tasks SET title = ?, description = ?, start_time = ?, end_time = ?, recurrence = ? WHERE id = ?";
+$stmt = $mysqli->prepare($query);
+$stmt->bind_param('sssssi', $title, $description, $start_time, $end_time, $recurrence, $id);
 
-if ($conn->query($sql) === TRUE) {
-    echo "Record updated successfully";
+if ($stmt->execute()) {
+    echo "Task updated successfully";
 } else {
-    echo "Error updating record: " . $conn->error;
+    echo "Error updating task: " . $mysqli->error;
 }
 
-$conn->close();
+$stmt->close();
+$mysqli->close();
 ?>
